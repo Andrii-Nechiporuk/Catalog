@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<CatalogApp.Models.CatalogItem>
 
 @{
-    ViewData["Title"] = "Index1";
+    ViewData["Title"] = "Каталог товарів";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index1</h1>
+<h1>@ViewData["Title"]</h1>
+<div class="float-end">
+    <a class="btn btn-success" asp-action="Create">Додати товар</a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -41,12 +41,12 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImgPath)
+                <img src="@Html.DisplayFor(modelItem => item.ImgPath)" class="img-fluid">
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
             </td>
         </tr>
 }

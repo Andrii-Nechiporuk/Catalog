@@ -1,5 +1,6 @@
 ﻿using CatalogApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 namespace CatalogApp.Controllers
 {
@@ -13,21 +14,25 @@ namespace CatalogApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_dbContext.CatalogItems.ToList());
+            return View("Index1", _dbContext.CatalogItems.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new CatalogItem());
+            return View("Create1", new CatalogItem());
         }
 
         [HttpPost]
-        public IActionResult Create(string name)
+        public IActionResult Create(CatalogItem data)
         {
-            _dbContext.CatalogItems.Add(new CatalogItem { Name = name, Price = 5, Id = new Random().Next(), Quantity = new Random().Next(), ImgPath = "" });
-            _dbContext.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _dbContext.CatalogItems.Add(new CatalogItem { Name = data.Name, Price = data.Price, Id = new Random().Next(), Quantity = data.Quantity, ImgPath = data.ImgPath });
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Create1",data);
         }
 
         [HttpGet]
