@@ -13,7 +13,7 @@ namespace CatalogApp.Models
         public double Price { get; set; }
         [Display(Name = "Кількість")]
         public double Quantity { get; set; }
-        [Display(Name = "Шлях до фото")]
+        [Display(Name = "Фото")]
         public string ImgPath { get; set; }
     }
 }

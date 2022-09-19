@@ -36,6 +36,20 @@ namespace CatalogApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult Delete(int? id) 
+        {
+            return View(_dbContext.CatalogItems.Find(id));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _dbContext.CatalogItems.Remove(_dbContext.CatalogItems.Find(id));
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public IActionResult Init()
         {
             if (_dbContext.CatalogItems.Any())
