@@ -50,6 +50,28 @@ namespace CatalogApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(_dbContext.CatalogItems.Find(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CatalogItem data)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _dbContext.CatalogItems.Find(data.Id);
+                item.Quantity = data.Quantity;
+                item.Name = data.Name;
+                item.Price = data.Price;
+                item.ImgPath = data.ImgPath;
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(data);
+        }
+
+        [HttpGet]
         public IActionResult Init()
         {
             if (_dbContext.CatalogItems.Any())
