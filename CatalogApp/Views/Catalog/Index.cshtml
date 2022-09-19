@@ -1,0 +1,18 @@
+﻿@{
+}
+@model IEnumerable<CatalogItem>
+<h3>Catalog</h3>
+@if(Model.Any())
+{
+	<ul>
+		@foreach (var catalog in Model)
+		{
+				<li>@catalog.Name</li>
+		}
+	</ul>
+
+}
+else
+{
+	<div class="alert alert-danger">Задачі відсутні</div>
+}
